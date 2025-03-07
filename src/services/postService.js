@@ -57,15 +57,14 @@ export const deletePost = async (postId, isAdmin, token) => {
 };
 
 // Récupérer l'auteur du post
-export const getUserById = async (userId, token) => {
+export const getUserById = async (userId, user, token) => {
     try {
-        if (!token) {
-            console.error("❌ Aucun token fourni pour récupérer l'utilisateur !");
+        if (!user?.isAdmin) {
+            // Si l'utilisateur n'est pas admin, inutile d'appeler l'API, retourne directement :
             return "Auteur inconnu";
         }
-        const url = `${API_URL}/user/all`;
-        console.log("📥 Chargement des utilisateurs :", url);
 
+        const url = `${API_URL}/user/all`;
         const response = await axios.get(url, {
             headers: { Authorization: `Bearer ${token}` },
         });
@@ -74,7 +73,7 @@ export const getUserById = async (userId, token) => {
         const author = users?.find(u => u.id === userId);
         return author?.name || "Auteur inconnu";
     } catch (error) {
-        console.error("❌ Erreur lors de la récupération de l'utilisateur :", error.response?.data || error);
+        console.error("Erreur récupération auteur:", error);
         return "Auteur inconnu";
     }
 };

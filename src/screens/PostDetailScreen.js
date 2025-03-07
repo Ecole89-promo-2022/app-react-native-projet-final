@@ -33,14 +33,16 @@ export default function PostDetailScreen({ route, navigation }) {
 
     useEffect(() => {
         const fetchAuthor = async () => {
-            if (post?.userId) {
-                const name = await getUserById(post.userId, userToken);
-                setAuthorName(name);
-                console.log("👤 Nom de l'auteur récupéré :", name);
-            }
+            if (!post?.userId) return;
+
+            const name = await getUserById(post.userId, user, userToken); // passe l'utilisateur actuel
+            setAuthorName(name);
+            console.log("👤 Nom de l'auteur récupéré :", name);
         };
+
         fetchAuthor();
-    }, [post?.userId]);
+    }, [post?.userId, user, userToken]);
+
 
     const handleDeletePost = async () => {
         if (!postId) {
