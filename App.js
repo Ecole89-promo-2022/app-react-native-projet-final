@@ -8,7 +8,8 @@ import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import UserListScreen from "./src/screens/UserListScreen";
 import PostDetailScreen from "./src/screens/PostDetailScreen";
-import CreatePostScreen from "./src/screens/CreatePostScreen"; // ✅ Import du nouvel écran
+import CreatePostScreen from "./src/screens/CreatePostScreen";
+import EditPostScreen from "./src/screens/EditPostScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -26,6 +27,7 @@ export default function App() {
             <Stack.Screen name="UserList" component={UserListScreen} />
             <Stack.Screen name="PostDetail" component={PostDetailScreen} />
             <Stack.Screen name="CreatePost" component={CreatePostScreen} />
+            <Stack.Screen name="EditPost" component={EditPostScreen} />
           </Stack.Navigator>
         </>
       </NavigationContainer>

@@ -102,6 +102,16 @@ export default function PostDetailScreen({ route, navigation }) {
                     Supprimer l'article
                 </Button>
             )}
+            {(user?.isAdmin || post?.userId === user?.id) && (
+                <Button
+                    mode="contained"
+                    onPress={() => navigation.navigate("EditPost", { postId })}
+                    style={{ marginTop: 10 }}
+                >
+                    Modifier l'article
+                </Button>
+            )}
+
         </ScrollView>
     );
 }
